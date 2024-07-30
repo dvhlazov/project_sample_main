@@ -1,5 +1,5 @@
 import express from 'express';
-import logger from 'morgan';
+import morgan from 'morgan';
 import createError from 'http-errors';
 
 import mainRouter from './routes/main.js';
@@ -11,7 +11,11 @@ const run = () => {
     server.set('views', './http/views');
     server.set('view engine', 'ejs');
 
-    server.use(logger('dev'));
+    server.use(morgan(':method :url :status :response-time ms - :res[content-length]')); //middleware logger for check info about all request(includes static files, server requests etc.)
+   
+   
+   
+
     server.use(express.static('./http/public'));
 
     server.use('/', mainRouter);
